@@ -50,10 +50,12 @@
 <body>
 
 <h1>GPG Online</h1>
+<input type="file" id="file" />
+<button id="read-file">Read File</button>
 
 <div class="message">
   <h2>Message to encrypt</h2>
-  <textarea rows="5"></textarea>
+  <textarea rows="5" id="textval"></textarea>
 </div>
 
 <div id="public-keys">
@@ -77,6 +79,29 @@
 <button id="add-private-key">Add Private Key</button>
 
 <script>
+document.querySelector("#read-file").addEventListener('click', function() {
+	// no file selected to read
+	if(document.querySelector("#file").value == '') {
+    console.log('No file selected');
+		return;
+	}
+
+	var file = document.querySelector("#file").files[0];
+
+	var reader = new FileReader();
+	reader.onload = function(e) {
+    // binary data
+    document.querySelector("#textval").value = '';
+    console.log(e.target.result);
+    document.querySelector("#textval").value = e.target.result;
+	};
+	reader.onerror = function(e) {
+		// error occurred
+		console.log('Error : ' + e.type);
+	};
+	reader.readAsBinaryString(file);
+});
+
 const query = query => document.querySelector(query);
 const queryAll = query => Array.prototype.slice.apply(document.querySelectorAll(query));
 const publicKeyTemplate = query('#public-keys').innerHTML;
