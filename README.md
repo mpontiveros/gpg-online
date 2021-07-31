@@ -6,5 +6,7 @@ Uses <a href="https://github.com/openpgpjs/openpgpjs">OpenPGP.js</a>.
 
 ## License
 
+![Sample Output](screen.gif)
+
 MIT
 
