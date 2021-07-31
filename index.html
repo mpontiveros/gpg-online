@@ -73,12 +73,18 @@
   <textarea rows="2"></textarea>
 </div>
 
-<pre id="output"></pre>
+Output <br />
+<textarea id="output">
+
+</textarea> <br />
+
 <button id="encrypt">Encrypt</button>
 <button id="add-public-key">Add Public Key</button>
 <button id="add-private-key">Add Private Key</button>
 
+
 <script>
+
 document.querySelector("#read-file").addEventListener('click', function() {
 	// no file selected to read
 	if(document.querySelector("#file").value == '') {
@@ -94,12 +100,15 @@ document.querySelector("#read-file").addEventListener('click', function() {
     document.querySelector("#textval").value = '';
     console.log(e.target.result);
     document.querySelector("#textval").value = e.target.result;
+    //download("encrypted.asc", e.target.result);
+
 	};
 	reader.onerror = function(e) {
 		// error occurred
 		console.log('Error : ' + e.type);
 	};
-	reader.readAsBinaryString(file);
+  //reader.readAsBinaryString(file);
+  reader.readAsDataURL(file);
 });
 
 const query = query => document.querySelector(query);
@@ -154,6 +163,8 @@ query('#encrypt').addEventListener('click', () => {
   .catch(err => alert(err.message))
   ;
 });
+
+
 </script>
 
 <p>
